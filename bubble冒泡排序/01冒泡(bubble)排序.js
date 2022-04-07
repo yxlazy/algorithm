@@ -80,3 +80,30 @@ function ascent(input) {
 bubble([1, 223, 3, -32, 32, -493, 0, 12, 12, 33], descent)
 
 bubble([1, 223, 3, -32, 32, -493, 0, 12, 12, 33], ascent)
+
+
+/**
+ * 递归版冒泡升序
+ * @param {number[]} input 
+ * @param {number} curr 冒泡执行的次数
+ * @returns 
+ */
+function recursion(input, curr = 0) {
+  if (curr == input.length) {
+    return input
+  }
+
+  for (let i = 0; i < input.length - 1; i++) {
+    const first = input[i], second = input[i + 1]
+      let temp
+      if (first > second) {
+        temp = first
+        input[i] = second
+        input[i + 1] = temp
+      }
+  }
+
+  return recursion(input, curr + 1)
+}
+
+bubble([1, 223, 3, -32, 32, -493, 0, 12, 12, 33], recursion)
