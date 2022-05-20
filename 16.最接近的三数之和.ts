@@ -24,7 +24,7 @@ function threeSumClosest(nums: number[], target: number): number {
 
       if (sum > target) {
         let k = third - 1
-        while (third < k &&  nums[k] === nums[third]) {
+        while (second < k &&  nums[k] === nums[third]) {
           k--
         }
         third = k
@@ -32,7 +32,7 @@ function threeSumClosest(nums: number[], target: number): number {
 
       if (sum < target) {
         let k = second + 1
-        while (second < k &&  nums[k] === nums[second]) {
+        while (third > k &&  nums[k] === nums[second]) {
           k++
         }
         second = k
