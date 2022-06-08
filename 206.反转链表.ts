@@ -18,16 +18,30 @@
  */
 
 function reverseList(head: ListNode | null): ListNode | null {
-  let curr =head
-  let prev = null
+  // let curr =head
+  // let prev = null
 
-  while (curr) {
-    let next = curr.next
-    curr.next = prev
-    prev = curr
-    curr = next
+  // while (curr) {
+  //   let next = curr.next
+  //   curr.next = prev
+  //   prev = curr
+  //   curr = next
+  // }
+  // return prev
+
+  // 利用假头和新链表，采用头部插入结点
+  const dummy = new ListNode(-1, null);
+
+  while (head) {
+    // 临时结点，保存当前结点的下一个结点，以防后续结点丢失
+    const tmp = head.next
+    head.next = dummy.next
+    dummy.next = head
+    // 老链表移动
+    head = tmp
   }
-  return prev
+
+  return dummy.next
 };
 // @lc code=end
 
