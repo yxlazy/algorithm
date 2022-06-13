@@ -18,25 +18,48 @@
  */
 
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
-  // 创建一个哑结点（dummyHead），方便对链表进行操作，其next指向链表头
-  let dummyHead = new ListNode(),  curr = dummyHead, length = 0;
-  dummyHead.next = head;
+  // // 创建一个哑结点（dummyHead），方便对链表进行操作，其next指向链表头
+  // let dummyHead = new ListNode(),  curr = dummyHead, length = 0;
+  // dummyHead.next = head;
 
-  // 获得链表长度
-  while (head) {
-    head = head.next;
-    length++
-  }
-  let i = 1
-  // length - n + 1 要删除节点的前驱节点， “+1”即为包含哑结点
-  while (i < (length - n + 1)) {
-    curr = curr.next;
-    i++;
-  }
-  // 指向删除节点的next，最主要是寻找前驱节点
-  curr.next = curr.next.next // 等号后面的curr.next为要删除的节点
+  // // 获得链表长度
+  // while (head) {
+  //   head = head.next;
+  //   length++
+  // }
+  // let i = 1
+  // // length - n + 1 要删除节点的前驱节点， “+1”即为包含哑结点
+  // while (i < (length - n + 1)) {
+  //   curr = curr.next;
+  //   i++;
+  // }
+  // // 指向删除节点的next，最主要是寻找前驱节点
+  // curr.next = curr.next.next // 等号后面的curr.next为要删除的节点
   
-  return dummyHead.next
+  // return dummyHead.next
+
+
+  // 一遍扫描实现 --- 双指针
+  // 先用一个指针向前移动n个位置
+  // 再两个指针一起移动
+  const dummy = new ListNode(0, head)
+  let front = dummy, back = dummy
+
+  while (head) {
+    if (n > 0) {
+      n--
+    } else {
+      back = back.next
+    }
+    front = front.next
+    head = head.next
+  }
+
+  if (n === 0) {
+    back.next = back.next.next
+  }
+
+  return dummy.next
 };
 // @lc code=end
 
